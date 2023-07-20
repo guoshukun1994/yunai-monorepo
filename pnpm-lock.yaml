@@ -1,0 +1,12 @@
+lockfileVersion: 5.3
+
+importers:
+
+  .:
+    specifiers: {}
+
+  packages/apps/react-x:
+    specifiers:
+      '@proj/react-components': workspace:^1.0.0
+    dependencies:
+      '@proj/react-components': link:../../components/react-components

@@ -1,0 +1,19 @@
+{
+  "name": "pnpm-monorepo",
+  "version": "1.0.0",
+  "description": "基于pnpm管理的monorepo仓库，致力于项目中常用的解决方案",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guoshukun1994/pnpm-monorepo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/guoshukun1994/pnpm-monorepo/issues"
+  },
+  "homepage": "https://github.com/guoshukun1994/pnpm-monorepo#readme"
+}
