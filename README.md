@@ -35,3 +35,34 @@
 通过软连接方式将@proj/react-components作为依赖包安装到@proj/react-x下
 * pnpm add @proj/react-components --filter @proj/react-x
 **软连接的过程都会体现在root下的node_modules/.pnpm中**
+
+## 安装代码检测环境
+### eslint做代码检测 prettier做代码格式美化
+```sh
+pnpm add eslint prettier -D -w
+npx eslint --init
+
+# 由于命令行自动化，不给我们加 w
+pnpm add @typescript-eslint/eslint-plugin @typescript-eslint/parser -D -w
+pnpm add eslint-plugin-react -D -w
+pnpm add eslint-config-prettier eslint-plugin-prettier -D -w 处理eslint和prettier的冲突
+```
+### 配置 .prettierrc.json文件
+
+## 配置代码提交规范
+安装commitlint\husky
+```sh
+npx husky-init
+pnpm add @commitlint-cli @commitlint/config-conventional -D -w
+pnpm i 
+```
+
+### 添加commitlint.config.js配置文件
+```sh
+echo "module.exports = {extends: ['@commitlint/config-conventional']};" > commitlint.config.js
+```
+
+## 配置 react 环境？
+```sh
+pnpm add webpack webpack-cli webpack-merge webpack-dev-server @babel/core @babel/preset-react @babel/preset-typescript babel-loader css-loader less style-loader less-loader postcss postcss-loader tailwindcss autoprefixer html-webpack-plugin cross-env -D --filter @proj/react-x
+```
