@@ -4,7 +4,8 @@
   "description": "基于pnpm管理的monorepo仓库，致力于项目中常用的解决方案",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,17 @@
   "bugs": {
     "url": "https://github.com/guoshukun1994/pnpm-monorepo/issues"
   },
-  "homepage": "https://github.com/guoshukun1994/pnpm-monorepo#readme"
+  "homepage": "https://github.com/guoshukun1994/pnpm-monorepo#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^17.6.7",
+    "@commitlint/config-conventional": "^17.6.7",
+    "@typescript-eslint/eslint-plugin": "^6.2.0",
+    "@typescript-eslint/parser": "^6.2.0",
+    "eslint": "^8.46.0",
+    "eslint-config-prettier": "^8.9.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-react": "^7.33.1",
+    "husky": "^8.0.0",
+    "prettier": "^3.0.0"
+  }
 }
