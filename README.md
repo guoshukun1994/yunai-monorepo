@@ -131,3 +131,7 @@ npx tailwindcss init
 - 配置 tailwind 基础设施 tailwind.css
 **想要样式生效还需在.postcssrc.json里加入tailwindcss**
 
+## 线上webpack配置优化
+- @babel/preset-env 根据指定的执行环境提供语法转换
+- cross-env 可以让本地开发模拟线上的环境
+- DefinePlugin 可以定义全局参数

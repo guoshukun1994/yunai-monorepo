@@ -2,7 +2,7 @@ import React from 'react'
 import { css } from '@emotion/css'
 import styles from './app.module.less'
 
-const color: string = 'red'
+const color: string = 'white'
 
 const App = () => {
 	return (
@@ -12,6 +12,7 @@ const App = () => {
 				className={css`
 					padding: 32px;
 					background-color: pink;
+          color: ${process.env.PRIMARY};
 					&: hover {
 						color: ${color};
 					}
