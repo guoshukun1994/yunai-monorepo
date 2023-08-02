@@ -33,6 +33,42 @@ module.exports = (isDev) => ({
                     "less-loader",    // less转换成css
                 ] // loader加载的顺序是自下而上
             },
+            {
+                test: /.(png|jpg|jpeg|gif|svg)/,
+                type: 'asset',
+                parser: {
+                    dataUrlCondition:{
+                        maxSize: 10*1024,
+                    }
+                },
+                generator: {
+                    filename: 'static/images/[name][ext]'
+                }
+            },
+            {
+                test: /.(woff2|eot|ttf|otf)/,
+                type: 'asset',
+                parser: {
+                    dataUrlCondition:{
+                        maxSize: 10*1024,
+                    }
+                },
+                generator: {
+                    filename: 'static/fonts/[name][ext]'
+                }
+            },
+            {
+                test: /.(mp4|mp3|webm)/,
+                type: 'asset',
+                parser: {
+                    dataUrlCondition:{
+                        maxSize: 10*1024,
+                    }
+                },
+                generator: {
+                    filename: 'static/medias/[name][ext]'
+                }
+            }
         ]
     },
     resolve: {
