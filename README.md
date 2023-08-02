@@ -61,6 +61,9 @@ pnpm i
 ```sh
 echo "module.exports = {extends: ['@commitlint/config-conventional']};" > commitlint.config.js
 ```
+在提交commit时可能会报错： SyntaxErroe: Invalid or unexpected token
+解决办法：
+这是因为配置文件的编码格式不正确：更改vscode下方编码格式改成 UTF-8
 
 ## 7、配置 typescript 环境
 ### 配置tsconfig.json
@@ -79,8 +82,21 @@ pnpm add react @types/react react-dom @types/react-dom --filter @proj/react-x
 ```sh
 pnpm add webpack webpack-cli webpack-merge webpack-dev-server @babel/core @babel/preset-react @babel/preset-typescript babel-loader css-loader less style-loader less-loader postcss postcss-loader tailwindcss autoprefixer html-webpack-plugin cross-env -D --filter @proj/react-x
 ```
+
 ### 编写webpack.base.js等配置文件
+如遇到 require文件时报错
+```sh
+Require statement not part of import statement.(@typescript-eslint/no-var-requires)
+```
+可以在eslintrc.json的rules添加以下内容：
+```sh
+  rules: {
+    '@typescript-eslint/no-var-requires': 0
+  }
+```
+
 ### 配置.babelrc文件
+
 ### 测试项目
 1. 本地开发环境
 ```sh
@@ -92,3 +108,26 @@ pnpm build
 ```
 把dist包用一个新窗口打开
 右键html文件 open with live server
+
+## 配置 webpack loader
+"autoprefixer": {} // 加上不同浏览器的兼容前缀
+
+## 配置样式处理方案
+css
+less
+cssModule
+
+### css in js 
+- @emotion/css 
+- styled-component
+- 好处是灵活了，坏处是代码更复杂了，没有提示
+
+### utility css
+- tailwindcss 
+- tailwindcss初始化配置
+```sh
+npx tailwindcss init
+```
+- 配置 tailwind 基础设施 tailwind.css
+**想要样式生效还需在.postcssrc.json里加入tailwindcss**
+
