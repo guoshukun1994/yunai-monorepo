@@ -28,5 +28,13 @@
     "eslint-plugin-react": "^7.33.1",
     "husky": "^8.0.0",
     "prettier": "^3.0.0"
+  },
+  "dependencies": {
+    "@headlessui/react": "^1.7.16",
+    "@types/react": "^18.2.18",
+    "@types/react-dom": "^18.2.7",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.1.6"
   }
 }
