@@ -20,6 +20,7 @@ const App = () => {
 				hello - emotion
 			</div>
 			<div className={styles.hello}>hello - css module</div>
+			<div className="text-blue-600 text-lg">hello - tailwind</div>
 		</div>
 	)
 }
