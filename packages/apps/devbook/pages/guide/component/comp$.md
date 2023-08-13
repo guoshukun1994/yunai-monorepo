@@ -79,67 +79,14 @@ eslint 虽然能帮我们提高代码质量，但并不能完全统一编码风�
 2. ESlint 的配置可能会有变化
 3. 提交的代码可能包含未被检查的文件
 
-## commit lint
-1. 进行 pre-commit 代码规范检测
-`npm i husky lint-staged -D`
-package.json 中配置：
-```json
- "lint-staged": {
-    "src/**/*.ts?(x)": [
-      "prettier --write",
-      "eslint --fix",
-      "git add"
-    ],
-    "src/**/*.less": [
-      "stylelint --syntax less --fix",
-      "git add"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "lint-staged"
-    }
-  },
-```
-**/表示匹配任何子路径, 包括目录分隔符/也会被它匹配, 所以用来这个通配符后, 目录下有多少子目录都会被匹配到
-
-*表示匹配除了目录分隔符(/)外的任何长度的字符串
-
-2. 进行 commit message 检测
-`npm i @commitlint/cli @commitlint/config-conventional commitizen cz-conventional-changelog -D`
-- Commitizen 是一个用于规范化 Git 提交信息的工具，它可以帮助我们更好地书写符合规范的 Git 提交信息，从而提高代码的可读性和可维护性。
-- cz-conventional-changelog 是 Commitizen 工具的一个插件,可以根据 Git 提交信息自动生成 CHANGELOG.md 文件，从而方便我们查看项目的版本历史和变化。
-- commitlint: 结合 git commit 完成 commit message的标准校验
-- 新增.commitlintrc.js
-- commitizen cz-conventional-changelog 可以生成一个标准的changelog, 在package.json的scripts 里配置命令如下：
-```json
-"scripts": {
-  "commit": "git-cz"
-},
-"config": {
-  "commitizen": {
-    "path": "cz-conventional-changelog"
-  }
-}
-```
-这样后续就可以用npm run commit 生成标准 changelog了
-- 可以 git init 初始化一下 git 项目
-
 ## typescript
-`npm i typescript -D`
 - 新建 tsconfig.json文件
 1. declaration boolean    生成相应的 .d.ts 文件
 2. declarationDir string  生成声明文件的路径
 3. allowSyntheticDefaultImports boolean 允许从没有设置默认导出的模块中默认导入。这并不影响代码的输出，仅为了类型检查。
 4. skipLibCheck 忽略所有的声明文件（ *.d.ts）的类型检查。
 
-## 安装 react 环境
-```sh
-npm i react react-dom @types/react @types/react-dom # 开发时依赖，宿主环境一定存在
-npm i prop-types # 运行时依赖， 宿主环境可能不存在，安装组件库时一起安装
-```
-| 此处用了 prop-types, 因为无法保证宿主环境也使用typescript,从而进行静态检查，故使用 prop-types 保证 JS用户也能得到友好的运行时报错信息
+| 可以使用 prop-types 保证 JS用户也能得到友好的运行时报错信息
 
 - 如何选择 PropTypes 还是 TypeScript 取决于你的团队和项目的具体情况。如果你的团队已经熟悉了 PropTypes，并且项目规模较小，那么可以继续使用 PropTypes。如果你的团队已经使用了 TypeScript，并且项目规模较大，那么可以考虑使用 TypeScript。
 - 虽然 PropTypes 也可以用于 React 组件的类型检查，但是在 Ant Design 中并没有使用 PropTypes 进行类型检查。相比之下，TypeScript 的类型检查机制更加严格和强大，可以发现更多的类型错误，以及提供更好的开发体验
@@ -153,28 +100,17 @@ npm i moduleName -g # 安装模块到全局，不会到 node_modules里,不会�
 npm i moduleName -S # 安装模块到 node_modules,写入到dependencies
 npm i moduleName -S -D # 安装模块到 node_modules,写入到devPendencies
 ```
-
-## 开发调试
-**主要解决开发组件时的调试、预览和组件文档编写**
-
-### 1、集成 dumi
-- 选择 [dumi](https://d.umijs.org/) 作为文档站点工具， 并兼具开发调试功能
-`npm i dumi rimraf serve -D`
-- 增加 scripts 到 package.json
-```json
-"scripts": {
-  "dev": "dumi dev",
-  "start": "npm run dev",
-  "build:site": "rimraf doc-site && dumi build",
-  "preview:site": "npm run build:site && serve doc-site"
-}
+```bash
+pnpm add sax # 保存到 dependencies下
+pnpm add -D sax # 保存到devDependencies
+pnpm add -g sax # 安装到全局环境下
+pnpm add sax --save-peer 
 ```
-- 新建 .umirc.ts 
 
 ## 使用 rollup 打包构建
 - 安装依赖
 ```sh
-pnpm add @rollup/plugin-alias @rollup/plugin-commonjs @rollup/plugin-node-resolve postcss rollup-plugin-auto-add rollup-plugin-clear rollup-plugin-filesize rollup-plugin-multi-input rollup-plugin-peer-deps-external rollup-plugin-postcss rollup-plugin-terser rollup-plugin-typescript --filter @proj/react-components
+pnpm add @rollup/plugin-alias @rollup/plugin-commonjs @rollup/plugin-node-resolve postcss rollup-plugin-auto-add rollup-plugin-clear rollup-plugin-filesize rollup-plugin-multi-input rollup-plugin-peer-deps-external rollup-plugin-postcss rollup-plugin-terser rollup-plugin-typescript2 --filter @proj/react-components
 ```
 - 添加 peerDependencies
   react、react-dom
@@ -182,3 +118,22 @@ pnpm add @rollup/plugin-alias @rollup/plugin-commonjs @rollup/plugin-node-resolv
 ### 添加 rollup 配置文件 以及 打包所用的 tsconfig
 
 ### 配置打包命令
+
+## 开发调试
+**主要解决开发组件时的调试、预览和组件文档编写**
+
+### 1、集成 dumi
+- 选择 [dumi](https://d.umijs.org/) 作为文档站点工具， 并兼具开发调试功能
+`pnpm i dumi rimraf serve -S -D --filter @proj/react-components`
+- 增加 scripts 到 package.json
+```json
+"scripts": {
+  "dev": "dumi dev",
+  "start": "pnpm run dev",
+  "build:site": "rimraf doc-site && dumi build",
+  "preview:site": "pnpm run build:site && serve doc-site"
+}
+```
+- 新建 .umirc.ts 
+- 搭建文档内容，根目录创建docs
+- 在每个组件目录下新建index.md

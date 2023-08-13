@@ -4,7 +4,7 @@ import './style/index.less'
 type KindType = 'info' | 'positive' | 'nagative' | 'warning'
 
 interface AlertProps {
-	children: ReactNode
+	children?: ReactNode
 	kind: KindType
 }
 

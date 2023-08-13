@@ -1,5 +1,5 @@
 # 实时打包
-`pnpm start`
+`pnpm build:watch`
 
 # 线上打包
 `pnpm build`

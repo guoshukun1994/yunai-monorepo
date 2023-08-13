@@ -86,9 +86,36 @@ echo "module.exports = {extends: ['@commitlint/config-conventional']};" > commit
 ```
 在提交commit时可能会报错： SyntaxErroe: Invalid or unexpected token
 解决办法：
-这是因为配置文件的编码格式不正确：更改vscode下方编码格式改成 UTF-8
+这是因为配置文件的编码格式不正确：更改vscode下方编码格式改成 UTF-
 
-### 添加commitizen cz-conventional-changelog
+## commit lint
+1. 进行 pre-commit 代码规范检测
+`pnpm i husky lint-staged -D`
+package.json 中配置：
+```json
+ "lint-staged": {
+    "src/**/*.ts?(x)": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ],
+    "src/**/*.less": [
+      "stylelint --syntax less --fix",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
+    }
+  },
+```
+**/表示匹配任何子路径, 包括目录分隔符/也会被它匹配, 所以用来这个通配符后, 目录下有多少子目录都会被匹配到
+
+*表示匹配除了目录分隔符(/)外的任何长度的字符串
+
+2. 进行 commit message 检测
 `pnpm add commitizen cz-conventional-changelog lint-staged -D -w`
 - Commitizen 是一个用于规范化 Git 提交信息的工具，它可以帮助我们更好地书写符合规范的 Git 提交信息，从而提高代码的可读性和可维护性。
 - cz-conventional-changelog 是 Commitizen 工具的一个插件,可以根据 Git 提交信息自动生成 CHANGELOG.md 文件，从而方便我们查看项目的版本历史和变化。
