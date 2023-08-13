@@ -1,12 +1,15 @@
 import React from 'react'
 import { css } from '@emotion/css'
 import styles from './app.module.less'
+import { Alert, Button } from '@proj/react-components';
 
 const color: string = 'white'
 
 const App = () => {
 	return (
 		<div>
+			<Alert kind='warning'>alert</Alert>
+			<Button onClick={()=> console.log('我的自定义按钮')}>我的按钮</Button>
 			<div className="title">App, hello</div>
 			<div
 				className={css`
