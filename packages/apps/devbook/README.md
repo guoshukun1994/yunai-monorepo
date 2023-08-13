@@ -88,6 +88,25 @@ echo "module.exports = {extends: ['@commitlint/config-conventional']};" > commit
 解决办法：
 这是因为配置文件的编码格式不正确：更改vscode下方编码格式改成 UTF-8
 
+### 添加commitizen cz-conventional-changelog
+`pnpm add commitizen cz-conventional-changelog lint-staged -D -w`
+- Commitizen 是一个用于规范化 Git 提交信息的工具，它可以帮助我们更好地书写符合规范的 Git 提交信息，从而提高代码的可读性和可维护性。
+- cz-conventional-changelog 是 Commitizen 工具的一个插件,可以根据 Git 提交信息自动生成 CHANGELOG.md 文件，从而方便我们查看项目的版本历史和变化。
+- commitlint: 结合 git commit 完成 commit message的标准校验
+- 新增.commitlintrc.js
+- commitizen cz-conventional-changelog 可以生成一个标准的changelog, 在package.json的scripts 里配置命令如下：
+```json
+"scripts": {
+  "commit": "git-cz"
+},
+"config": {
+  "commitizen": {
+    "path": "cz-conventional-changelog"
+  }
+}
+```
+这样后续就可以用pnpm run commit 生成标准 changelog了
+
 ## 7、配置 typescript 环境
 ### 配置tsconfig.json
 如果本地环境没有typescirpt的可以装一下
