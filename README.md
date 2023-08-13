@@ -1,6 +1,6 @@
 # my all
 
-技术栈：[React](https://reactjs.org/) + [antd](https://ant.design/) + [Vite](https://vitejs.dev/) + [pnpm](https://pnpm.io/)
+技术栈：[React](https://reactjs.org/) + [antd](https://ant.design/) + [Vite](https://vitejs.dev/) + [pnpm](https://pnpm.io/) + [rollup](https://rollupjs.org/introduction/)
 
 ## 准备工作
 - 安装 [Nodejs](https://nodejs.org/en/)
