@@ -5,6 +5,7 @@ const path = require('path');
 module.exports = merge(getBaseCfg(true), {
     devtool: "source-map",
     devServer: {
+        open: true,
         port: 3000,
         compress: false, // 不要压缩
         hot: true,      // 热更新
