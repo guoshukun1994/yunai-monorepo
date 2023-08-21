@@ -7,6 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky install",
     "doc": "pnpm --filter @proj/devbook run dev",
+    "start:x": "pnpm --filter @proj/react-x run start",
+    "build:components": "pnpm --filter @proj/react-components run build",
     "commit": "git-cz"
   },
   "repository": {

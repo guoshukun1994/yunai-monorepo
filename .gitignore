@@ -1,3 +1,5 @@
-node_modules/
-dist/
-.dumi/
+node_modules
+dist
+.dumi
+esm
+umd

@@ -15,3 +15,10 @@ pnpm install
 ```bash
 pnpm doc
 ```
+
+## 组件库本地打包
+```bash
+pnpm --filter @proj/react-components run build
+```
+<!-- 保持本地组件库最新后即可启动依赖组件库的相关项目，因为这里没有把打包文件放到git上 -->
+
