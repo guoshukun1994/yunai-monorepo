@@ -1,11 +1,19 @@
 {
   "name": "yunai-cli",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "一个多功能的自定义脚手架",
   "bin": "./bin/www.js",
+  "main": "./bin/www.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "files": [
+    "bin"
+  ],
+  "keywords": [
+    "yunai-cli",
+    "自定义脚手架"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
