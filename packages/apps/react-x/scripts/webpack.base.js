@@ -1,7 +1,8 @@
 const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { webpack, DefinePlugin } = require('webpack');
+const { DefinePlugin } = require('webpack');
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 module.exports = (isDev) => ({
     entry: path.join(__dirname, '../src/index.tsx'),
@@ -118,6 +119,7 @@ module.exports = (isDev) => ({
         }),
         new DefinePlugin({ // 可以让全局读取到process.env.PRIMARY 还可以在打包时候通过分环境打不同的包
             'process.env.PRIMARY': JSON.stringify(process.env.PRIMARY)
-        })
+        }),
+        new MonacoWebpackPlugin()
     ]
 })
