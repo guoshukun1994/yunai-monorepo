@@ -105,6 +105,9 @@ module.exports = (isDev) => ({
         ]
     },
     resolve: {
+        alias: {
+            '@': path.join(__dirname, '../src')
+        },
         extensions: ['.tsx', '.ts', '.jsx', '.js'] // 解析文件的时候不用写目录 index的文件
     },
     plugins: [
