@@ -14,8 +14,10 @@
   "license": "ISC",
   "dependencies": {
     "@proj/react-components": "workspace:^1.0.0",
+    "antd": "^5.8.3",
     "monaco-editor": "^0.41.0",
     "monaco-editor-webpack-plugin": "^7.1.0",
+    "react-error-boundary": "^4.0.11",
     "react-router-dom": "^6.14.2"
   },
   "devDependencies": {
