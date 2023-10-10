@@ -8,6 +8,7 @@
 		"prepare": "husky install",
 		"doc": "pnpm --filter @proj/devbook run dev",
 		"start:x": "pnpm --filter @proj/react-x run start",
+		"start:md": "cd packages/apps/back-end && npx nodemon server.js",
 		"build:components": "pnpm --filter @proj/react-components run build",
 		"commit": "git-cz"
 	},
@@ -62,6 +63,7 @@
 		"prettier": "^3.0.3"
 	},
 	"dependencies": {
+		"@ant-design/pro-components": "^2.6.28",
 		"@headlessui/react": "^1.7.17",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
