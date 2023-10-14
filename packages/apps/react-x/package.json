@@ -13,8 +13,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@ant-design/icons": "^5.2.6",
     "@proj/react-components": "workspace:^1.0.0",
     "antd": "^5.8.3",
+    "clipboard": "^2.0.11",
+    "highlight.js": "^11.9.0",
     "markdown-it": "^13.0.2",
     "monaco-editor": "^0.41.0",
     "monaco-editor-webpack-plugin": "^7.1.0",

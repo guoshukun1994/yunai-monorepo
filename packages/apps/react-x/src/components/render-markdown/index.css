@@ -1,0 +1,13 @@
+.copy-btn {
+	position: absolute;
+	right: 24px;
+	top: 24px;
+	padding: 4px 8px;
+	border-radius: 6px;
+	background-color: beige;
+	color: black;
+}
+
+.copy-btn:hover {
+	color: #1cb2d2;
+}
