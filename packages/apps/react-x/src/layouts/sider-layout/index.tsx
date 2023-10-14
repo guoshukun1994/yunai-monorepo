@@ -1,14 +1,16 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Layout, Menu } from 'antd'
 import { filterMenuList } from '@/utils/filterMenuList'
 
 const { Sider } = Layout
 export const SiderLayout: React.FC = () => {
+	const navigate = useNavigate()
 	return (
 		<Sider
-			className="!bg-transparent mt-[52px]"
+			className="!bg-[#F8F0E5] relative z-0 top-[84px] opacity-80 rounded-md"
 			style={{
-				height: 'calc(100vh - 52px)'
+				height: 'calc(100vh - 84px)'
 			}}
 			trigger={null}
 			collapsible
@@ -19,6 +21,9 @@ export const SiderLayout: React.FC = () => {
 				className="bg-transparent !border-none"
 				mode="inline"
 				items={filterMenuList()}
+				onClick={({ key }) => {
+					navigate(key)
+				}}
 			/>
 		</Sider>
 	)

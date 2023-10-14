@@ -35,10 +35,13 @@ const BasicLayout = () => {
 				appName="前端万事屋"
 				pathname={pathname}
 			/>
-			<Layout>
+			<Layout className="px-10 ">
 				<HeaderLayout />
-				{!pathname.includes('basics') && <SiderLayout />}
-				<Layout.Content className='mt-[52px] min-h-screen'>
+				{!pathname.includes('home') && <SiderLayout />}
+				<Layout.Content
+					className="mt-[84px]"
+					style={{ height: 'calc(100vh - 84px)' }}
+				>
 					<Outlet />
 				</Layout.Content>
 			</Layout>

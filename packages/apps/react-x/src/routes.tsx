@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useRoutes, Outlet, redirect } from 'react-router-dom'
+import { useRoutes } from 'react-router-dom'
 import BasicLayout from '@/layouts/basic-layout'
 import Home from '@/pages/home'
 import Basics from '@/pages/basics'
@@ -10,6 +10,7 @@ import Engineering from '@/pages/engineering'
 import Frame from '@/pages/frame'
 import Node from '@/pages/node'
 import type { RouteObjectWithTitle } from '@proj/react-components'
+import LinkedList from './pages/datastructure/linked-list'
 
 // routes 配置方法：https://reactrouter.com/en/v6.3.0/api#useroutes
 export const routes = [
@@ -21,15 +22,24 @@ export const routes = [
 	},
 	{
 		path: '/',
-		element: (
-			<BasicLayout/>
-		),
+		element: <BasicLayout />,
 		children: [
 			{
 				path: 'basics',
 				title: '基础',
 				element: <Basics />,
 				children: []
+			},
+			{
+				path: 'datastructure',
+				title: '数据结构',
+				children: [
+					{
+						path: 'linked-list',
+						title: '链表',
+						element: <LinkedList />,
+					}
+				]
 			},
 			{
 				path: 'algorithm',
