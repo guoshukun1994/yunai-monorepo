@@ -8,7 +8,7 @@ export const SiderLayout: React.FC = () => {
 	const navigate = useNavigate()
 	return (
 		<Sider
-			className="!bg-[#F8F0E5] relative z-0 top-[84px] opacity-80 rounded-md"
+			className="!bg-[#F8F0E5] fixed z-0 top-[84px] opacity-80 rounded-md"
 			style={{
 				height: 'calc(100vh - 84px)'
 			}}

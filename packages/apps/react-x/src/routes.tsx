@@ -3,14 +3,18 @@ import { useRoutes } from 'react-router-dom'
 import BasicLayout from '@/layouts/basic-layout'
 import Home from '@/pages/home'
 import Basics from '@/pages/basics'
-import Algorithm from '@/pages/algorithm'
 import Browser from '@/pages/browser'
 import Communication from '@/pages/communication'
 import Engineering from '@/pages/engineering'
 import Frame from '@/pages/frame'
 import Node from '@/pages/node'
 import type { RouteObjectWithTitle } from '@proj/react-components'
-import LinkedList from './pages/datastructure/linked-list'
+import LinkedList from '@/pages/datastructure/linked-list'
+import SortSearch from '@/pages/algorithm/sort-search'
+import DivideConquer from '@/pages/algorithm/divide-conquer'
+import DynamicProgramming from '@/pages/algorithm/dynamic-programming'
+import Greedy from '@/pages/algorithm/greedy'
+import Backtracking from '@/pages/algorithm/backtracking'
 
 // routes 配置方法：https://reactrouter.com/en/v6.3.0/api#useroutes
 export const routes = [
@@ -37,15 +41,40 @@ export const routes = [
 					{
 						path: 'linked-list',
 						title: '链表',
-						element: <LinkedList />,
+						element: <LinkedList />
 					}
 				]
 			},
 			{
 				path: 'algorithm',
 				title: '算法',
-				element: <Algorithm />,
-				children: []
+				children: [
+					{
+						path: 'sort-search',
+						title: '排序&搜索',
+						element: <SortSearch />
+					},
+					{
+						path: 'divide-conquer',
+						title: '分治',
+						element: <DivideConquer />
+					},
+					{
+						path: 'dynamic-programming',
+						title: '动态规划',
+						element: <DynamicProgramming />
+					},
+					{
+						path: 'greedy',
+						title: '贪心',
+						element: <Greedy />
+					},
+					{
+						path: 'backtracking',
+						title: '回溯',
+						element: <Backtracking />
+					}
+				]
 			},
 			{
 				path: 'frame',

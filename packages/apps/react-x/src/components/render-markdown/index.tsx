@@ -70,7 +70,7 @@ const RenderMarkDown = ({ mdText }: Props) => {
 			mdRef.current.innerHTML = html
 		}
 	}, [mdText])
-	return <div ref={mdRef} />
+	return <div className="overflow-hidden" ref={mdRef} />
 }
 
 export default RenderMarkDown

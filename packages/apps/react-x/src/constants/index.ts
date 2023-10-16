@@ -20,3 +20,15 @@ export const TOP_NAV_LIST = [
 		label: '工程化'
 	}
 ]
+
+export type SORT_SEARCH_KEYS_TYPE = {
+	bubble: string
+	select: string
+	insert: string
+}
+
+export const SORT_SEARCH_KEYS: SORT_SEARCH_KEYS_TYPE = {
+	bubble: '冒泡',
+	select: '选择',
+	insert: '插入'
+}

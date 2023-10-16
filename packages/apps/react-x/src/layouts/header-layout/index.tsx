@@ -15,9 +15,11 @@ export const HeaderLayout = () => {
 	return (
 		<Header className="!bg-[#EADBCB] flex items-center fixed z-10 left-0 top-0 w-screen h-[52px] pt-0 pb-0 rounded-bl-md">
 			<Space>
-				<img width={24} src={images.logo} />
+				<span className="flex items-center">
+					<img width={24} src={images.logo} />
+				</span>
 				<span
-					className="text-[#FF9B50] hover:text-[#E9B824] font-semibold text-lg cursor-pointer"
+					className="text-[#FF9B50] hover:text-[#E9B824] font-semibold text-lg cursor-pointer flex items-center"
 					onClick={() => navigate('home')}
 				>
 					前端万事屋
@@ -29,9 +31,14 @@ export const HeaderLayout = () => {
 					{TOP_NAV_LIST.map(({ key, path, label }) => {
 						const color = pathname.includes(path)
 							? '#1CB2D2'
-							: undefined
+							: '#595959'
 						return (
-							<NavLink key={key} to={path} style={{ color }}>
+							<NavLink
+								key={key}
+								to={path}
+								className="hover:!text-[#1CB2D2]"
+								style={{ color }}
+							>
 								{label}
 							</NavLink>
 						)
