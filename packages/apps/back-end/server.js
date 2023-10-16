@@ -14,15 +14,48 @@ app.use(cors());
 // app.use(express.json({ limit: '50mb' }));
 // app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
-// 读取Markdown文件内容  
+// 读取 数据结构 - 链表 md 
 app.get('/md/linkedList', (req, res) => {
-    const filePath = path.join(__dirname, 'public', 'linked-list.md');
+    const filePath = path.join(__dirname, 'public', 'datastructure/linked-list.md');
     fs.readFile(filePath, 'utf8', (err, data) => {
         if (err) {
-            res.status(500).send('Error reading file');
+            res.status(500).send(`文件夹读取失败：${err}`);
             return;
         }
         res.send(data);
+    });
+});
+
+// 读取 算法目录 - 组装目录下各文件数据
+app.get('/md/sort-search', (req, res) => {
+    const folderPath = path.join(__dirname, 'public', 'algorithm/sort-search');
+    fs.readdir(folderPath, 'utf8', (err, files) => {
+        if (err) {
+            res.status(500).send(`文件夹读取失败：${err}`);
+            return;
+        }
+        const result = {}
+        let count = 0
+        files.forEach(file => {
+            const filePath = folderPath.concat('/', file)
+            const key = file.split('.')[0]
+            fs.readFile(filePath, 'utf8', (err, data) => {
+                if (err) {
+                    res.status(500).send(`文件夹读取失败：${err}`);
+                    return;
+                }
+                count++;
+                result[key] = data;
+
+                if (count === files.length) {
+                    let sendRes = {};
+                    ['bubble', 'select', 'insert'].forEach(key => {
+                        sendRes[key] = result[key]
+                    })
+                    res.send(sendRes);
+                }
+            })
+        })
     });
 });
 
