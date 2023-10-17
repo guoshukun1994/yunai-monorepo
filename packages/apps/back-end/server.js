@@ -50,7 +50,7 @@ app.get('/md/sort-search', (req, res) => {
                 if (count === files.length) {
                     let sendRes = {};
                     ['bubble', 'select', 'insert'].forEach(key => {
-                        sendRes[key] = result[key]
+                        sendRes[key] = result[key];
                     })
                     res.send(sendRes);
                 }
@@ -58,6 +58,18 @@ app.get('/md/sort-search', (req, res) => {
         })
     });
 });
+
+// 读取 js - 手写 md
+app.get('/md/handwriting', (req, res) => {
+    const filePath = path.join(__dirname, 'public', 'basics/js/handwriting/index.md')
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            res.status(500).send(`文件读取失败：${err}`)
+            return;
+        }
+        res.send(data);
+    })
+})
 
 // 启动服务器并监听端口  
 const port = process.env.PORT || 3001;
