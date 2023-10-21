@@ -11,3 +11,10 @@
 .copy-btn:hover {
 	color: #1cb2d2;
 }
+
+.right-toc-table {
+	position: fixed;
+	right: 40px;
+	top: 50%;
+	transform: translateY(-50%);
+}

@@ -20,6 +20,8 @@
     "clipboard": "^2.0.11",
     "highlight.js": "^11.9.0",
     "markdown-it": "^13.0.2",
+    "markdown-it-anchor": "^8.6.7",
+    "markdown-it-toc-done-right": "^4.2.0",
     "monaco-editor": "^0.41.0",
     "monaco-editor-webpack-plugin": "^7.1.0",
     "react-error-boundary": "^4.0.11",
