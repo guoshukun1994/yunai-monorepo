@@ -16,6 +16,9 @@ import yaml from 'highlight.js/lib/languages/yaml'
 import xml from 'highlight.js/lib/languages/xml'
 import shell from 'highlight.js/lib/languages/shell'
 
+import _ from 'lodash-es'
+import { getKey } from '@/utils'
+
 hljs.registerLanguage('bash', bash)
 hljs.registerLanguage('javascript', javascript)
 hljs.registerLanguage('typescript', typescript)
@@ -36,11 +39,17 @@ const RenderMarkDown = ({ mdText }: Props) => {
         breaks: true,
         xhtmlOut: true,
         typographer: true,
-        highlight: function (str, lang) {
-            const clipboardHtmlStr = `<button class="copy-btn" data-clipboard-action="copy" data-clipboard-target="#copy">复制</button>`
+        highlight: function (str: string, lang: string) {
+            const key = getKey()
+            const clipboardHtmlStr =
+                '<button class="copy-btn" data-clipboard-action="copy" data-clipboard-target="#copy' +
+                key +
+                '">复制</button>'
             try {
                 return (
-                    '<pre class="hljs" style="padding: 24px;position:relative"><code id="copy">' +
+                    '<pre class="hljs" style="padding: 24px;position:relative"><code id="copy' +
+                    key +
+                    '">' +
                     hljs.highlight(lang, str, true).value +
                     '</code>' +
                     clipboardHtmlStr +
@@ -57,17 +66,20 @@ const RenderMarkDown = ({ mdText }: Props) => {
             permalinkSymbol: '#',
             permalinkBefore: true,
         })
-        .use(MarkdownitToc, { containerClass: 'right-toc-table' })
+        .use(MarkdownitToc, { containerClass: 'custom-right-toc' })
 
     const html = md.render(mdText)
 
     useEffect(() => {
         const clipboard = new ClipboardJS('.copy-btn')
 
-        clipboard.on('success', function (e) {
-            message.success('复制成功')
-            e.clearSelection()
-        })
+        clipboard.on(
+            'success',
+            _.throttle(function (e) {
+                message.success('复制成功')
+                e.clearSelection()
+            }, 500)
+        )
 
         clipboard.on('error', function () {
             message.error('复制失败')

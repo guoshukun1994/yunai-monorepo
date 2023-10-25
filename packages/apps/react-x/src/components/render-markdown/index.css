@@ -1,20 +1,20 @@
 .copy-btn {
-	position: absolute;
-	right: 24px;
-	top: 24px;
-	padding: 4px 8px;
-	border-radius: 6px;
-	background-color: beige;
-	color: black;
+    position: absolute;
+    right: 24px;
+    top: 24px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    background-color: beige;
+    color: black;
 }
 
 .copy-btn:hover {
-	color: #1cb2d2;
+    color: #1cb2d2;
 }
 
-.right-toc-table {
-	position: fixed;
-	right: 40px;
-	top: 50%;
-	transform: translateY(-50%);
+.custom-right-toc {
+    position: fixed;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
 }
