@@ -71,6 +71,18 @@ app.get('/md/handwriting', (req, res) => {
     })
 })
 
+// 读取 js - 基础内功 md
+app.get('/md/basement', (req, res) => {
+    const filePath = path.join(__dirname, 'public', 'basics/js/basement/index.md')
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            res.status(500).send(`文件读取失败：${err}`)
+            return;
+        }
+        res.send(data);
+    })
+})
+
 // 启动服务器并监听端口  
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
