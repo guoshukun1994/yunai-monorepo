@@ -2,7 +2,6 @@ import * as React from 'react'
 import { useRoutes } from 'react-router-dom'
 import BasicLayout from '@/layouts/basic-layout'
 import Home from '@/pages/home'
-import Basics from '@/pages/basics'
 import Browser from '@/pages/browser'
 import Communication from '@/pages/communication'
 import Engineering from '@/pages/engineering'
@@ -16,6 +15,7 @@ import DynamicProgramming from '@/pages/algorithm/dynamic-programming'
 import Greedy from '@/pages/algorithm/greedy'
 import Backtracking from '@/pages/algorithm/backtracking'
 import Handwriting from '@/pages/basics/handwriting'
+import Basement from '@/pages/basics/basement'
 
 // routes 配置方法：https://reactrouter.com/en/v6.3.0/api#useroutes
 export const routes = [
@@ -37,6 +37,11 @@ export const routes = [
                         path: 'handwriting',
                         title: '手写题',
                         element: <Handwriting />,
+                    },
+                    {
+                        path: 'basement',
+                        title: '基础内功',
+                        element: <Basement />,
                     },
                 ],
             },

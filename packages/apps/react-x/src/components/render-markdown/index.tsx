@@ -17,7 +17,7 @@ import xml from 'highlight.js/lib/languages/xml'
 import shell from 'highlight.js/lib/languages/shell'
 
 import _ from 'lodash-es'
-import { getKey } from '@/utils'
+import { escapeHtml, getKey } from '@/utils'
 
 hljs.registerLanguage('bash', bash)
 hljs.registerLanguage('javascript', javascript)
@@ -61,12 +61,27 @@ const RenderMarkDown = ({ mdText }: Props) => {
         },
     })
         .use(MarkdownitAnchor, {
-            level: [1, 2, 3],
+            level: 3,
             permalink: true,
             permalinkSymbol: '#',
             permalinkBefore: true,
         })
         .use(MarkdownitToc, { containerClass: 'custom-right-toc' })
+
+    md.renderer.rules.code_inline = function (tokens, idx, options, env, slf) {
+        const token = tokens[idx]
+        const contentArr = token.content.split(' ')
+        const color = contentArr.length > 1 ? contentArr[0] : 'red'
+        const content = contentArr[contentArr.length - 1]
+        return (
+            '<code style=' +
+            `"color: ${color}"` +
+            slf.renderAttrs(token) +
+            '>' +
+            escapeHtml(content) +
+            '</code>'
+        )
+    }
 
     const html = md.render(mdText)
 
