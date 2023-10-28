@@ -41,8 +41,27 @@ const RenderMarkDown = ({ mdText }: Props) => {
         typographer: true,
         highlight: function (str: string, lang: string) {
             const key = getKey()
+
+            setTimeout(() => {
+                const clipboard = new ClipboardJS('.copy' + key)
+
+                clipboard.on(
+                    'success',
+                    _.debounce(function (e) {
+                        message.success('复制成功')
+                        e.clearSelection()
+                    }, 300)
+                )
+
+                clipboard.on('error', function () {
+                    message.error('复制失败')
+                })
+            }, 0)
+
             const clipboardHtmlStr =
-                '<button class="copy-btn" data-clipboard-action="copy" data-clipboard-target="#copy' +
+                '<button class="copy-btn copy' +
+                key +
+                '" data-clipboard-action="copy" data-clipboard-target="#copy' +
                 key +
                 '">复制</button>'
             try {
@@ -68,6 +87,7 @@ const RenderMarkDown = ({ mdText }: Props) => {
         })
         .use(MarkdownitToc, { containerClass: 'custom-right-toc' })
 
+    // 给 md 代码行加颜色
     md.renderer.rules.code_inline = function (tokens, idx, options, env, slf) {
         const token = tokens[idx]
         const contentArr = token.content.split(' ')
@@ -84,22 +104,6 @@ const RenderMarkDown = ({ mdText }: Props) => {
     }
 
     const html = md.render(mdText)
-
-    useEffect(() => {
-        const clipboard = new ClipboardJS('.copy-btn')
-
-        clipboard.on(
-            'success',
-            _.throttle(function (e) {
-                message.success('复制成功')
-                e.clearSelection()
-            }, 500)
-        )
-
-        clipboard.on('error', function () {
-            message.error('复制失败')
-        })
-    }, [])
 
     useEffect(() => {
         if (mdRef.current) {
