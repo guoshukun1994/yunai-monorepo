@@ -49,7 +49,7 @@ app.get('/md/sort-search', (req, res) => {
 
                 if (count === files.length) {
                     let sendRes = {};
-                    ['bubble', 'select', 'insert'].forEach(key => {
+                    ['bubble', 'select', 'insert', 'merge'].forEach(key => {
                         sendRes[key] = result[key];
                     })
                     res.send(sendRes);
