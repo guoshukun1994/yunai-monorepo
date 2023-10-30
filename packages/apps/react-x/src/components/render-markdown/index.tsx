@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { message } from 'antd'
 import ClipboardJS from 'clipboard'
 import Markdownit from 'markdown-it'
@@ -18,6 +19,7 @@ import shell from 'highlight.js/lib/languages/shell'
 
 import _ from 'lodash-es'
 import { escapeHtml, getKey } from '@/utils'
+import classnames from 'classnames'
 
 hljs.registerLanguage('bash', bash)
 hljs.registerLanguage('javascript', javascript)
@@ -31,6 +33,7 @@ type Props = {
     mdText: string
 }
 const RenderMarkDown = ({ mdText }: Props) => {
+    const { pathname } = useLocation()
     const mdRef = useRef<HTMLDivElement>(null)
 
     const md = new Markdownit({
@@ -110,7 +113,15 @@ const RenderMarkDown = ({ mdText }: Props) => {
             mdRef.current.innerHTML = html
         }
     }, [mdText])
-    return <div className="overflow-hidden pr-40" ref={mdRef} />
+    return (
+        <div
+            className={classnames(
+                'overflow-hidden',
+                pathname.includes('basement') ? 'pr-56' : 'pr-40'
+            )}
+            ref={mdRef}
+        />
+    )
 }
 
 export default RenderMarkDown

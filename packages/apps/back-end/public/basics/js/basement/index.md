@@ -97,4 +97,71 @@ this 的 5 种 绑定方式
 4. **new 构造函数绑定**，this 指向新生成的对象
 5. 箭头函数，this 指向的是定义该函数时，所处的外层上下文中的 this, 箭头函数的this在定义的时候就决定了，不能更改
 
+---
+
+### 闭包
+
+1. 概念：**闭包就是函数引用了外部作用域的变量**
+2. 常见闭包：一是函数作为返回值，一是函数作为参数传递
+3. 作用：可以让局部变量的值始终保持在内存中；对内部变量进行保护，使外部访问不到，比如：`函数防抖和节流`
+4. 副作用：不合理的使用闭包，会造成内存泄露（因为该内存使用完毕后未被回收），知道闭包被销毁闭包中引用的变量才会被垃圾回收。
+
+#### 闭包的使用场景示例：
+
+**一、利用闭包来让 for 循环中的 var 变量被正确使用，不会溢出到全局**
+
+错误使用：
+
+```js
+for (var i = 0; i < 5; i++) {
+    setTimeout(function () {
+        console.log(i) // 1s后打印出5个5 不是我们要的结果
+    }, 1000)
+}
+```
+
+正确用法一 使用IIFE：
+
+```js
+for (var i = 0; i < 5; i++) {
+    ;(function (j) {
+        setTimeout(function () {
+            console.log(j)
+        }, 1000)
+    })(i)
+}
+```
+
+正确用法二 使用setTimeout的第三个参数：
+
+```js
+for (var i = 0; i < 5; i++) {
+    setTimeout(
+        function (j) {
+            console.log(j)
+        },
+        1000,
+        i
+    )
+}
+```
+
+**二、 利用闭包生成一个计数器**
+
+```js
+function addCounter(initCount = 0) {
+    let count = initCount
+
+    return () => {
+        count += 1
+        return count
+    }
+}
+
+const bibao = addCounter()
+console.log(bibao())
+console.log(bibao())
+console.log(bibao())
+```
+
 ${toc}
