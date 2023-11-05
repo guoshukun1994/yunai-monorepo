@@ -85,6 +85,22 @@ myNew(fn, 3)
     -   返回Promise,执行下一个then
     -   返回非Promise,直接resolve
 
+3. **实现 Promise.race**(静态方法)
+
+-   接收一个 Promise 数组参数且返回Promise对象，若有非 Promise 项，则此项为成功；
+-   只要有一项成功或失败，就直接返回成功或失败的结果。
+
+4. **实现 Promise.all**(静态方法)
+
+-   接收一个 Promise 数组参数且返回Promise对象，若有非 Promise 项，则此项为成功；
+-   若有一项失败，则直接返回失败结果；
+-   若所有 Promise 均成功则返回成功结果，结果项的顺序和在Promise数组的顺序保持一致。
+
+5. **实现 Promise.allSettled**(静态方法)
+
+-   接收一个 Promise 数组参数且返回Promise对象，若有非 Promise 项，则此项为成功；
+-   所有Promise完成后（`无论成功或失败`），完成`状态和结果`按`顺序`放到结果数组里返回。
+
 实现代码：
 
 ```js
@@ -123,7 +139,7 @@ class MyPromise {
     }
 
     reject(reason) {
-        if (this.PromiseState === 'pending') return // 状态不会二次改变，一旦从pending改变之后
+        if (this.PromiseState !== 'pending') return // 状态不会二次改变，一旦从pending改变之后
         this.PromiseState = 'rejected'
         this.PromiseResult = reason
 
@@ -177,6 +193,87 @@ class MyPromise {
 
         return thenPromise
     }
+
+    static race(promises) {
+        return new MyPromise((resolve, reject) => {
+            promises.forEach((promise) => {
+                if (promise instanceof MyPromise) {
+                    promise.then(
+                        (res) => {
+                            resolve(res)
+                        },
+                        (err) => {
+                            reject(err)
+                        }
+                    )
+                } else {
+                    resolve(promise)
+                }
+            })
+        })
+    }
+
+    static all(promises) {
+        return new MyPromise((resolve, reject) => {
+            let count = 0
+            const result = []
+
+            const addRes = (res, index) => {
+                result[index] = res
+                count++
+                if (count === promises.length) {
+                    resolve(result)
+                }
+            }
+            promises.forEach((promise, index) => {
+                if (promise instanceof MyPromise) {
+                    promise.then(
+                        (res) => {
+                            addRes(res, index)
+                        },
+                        (err) => {
+                            reject(err)
+                        }
+                    )
+                } else {
+                    addRes(res, index)
+                }
+            })
+        })
+    }
+
+    static allSettled(promises) {
+        return new MyPromise((resolve, reject) => {
+            const result = []
+            let count = 0
+
+            const addRes = (status, value, index) => {
+                result[index] = {
+                    status,
+                    value,
+                }
+                count++
+                if (count === promises.length) {
+                    resolve(result)
+                }
+            }
+
+            promises.forEach((promise, index) => {
+                if (promise instanceof MyPromise) {
+                    promise.then(
+                        (res) => {
+                            addRes('fulfilled', res, index)
+                        },
+                        (err) => {
+                            addRes('rejected', err, index)
+                        }
+                    )
+                } else {
+                    addRes('fulfilled', promise, index)
+                }
+            })
+        })
+    }
 }
 ```
 
@@ -218,6 +315,40 @@ const p4 = new MyPromise((resolve, reject) => {
         })
     })
     .then((res) => console.log(res))
+```
+
+测试race、all、allSettled：
+
+```js
+const p1 = new MyPromise(() => {
+    throw 'error'
+})
+
+const p2 = new MyPromise((resolve, reject) => {
+    resolve('1111')
+})
+
+const p3 = new MyPromise((resolve, reject) => {
+    setTimeout(() => {
+        resolve('3333')
+    }, 1000)
+})
+MyPromise.all([p1, p2]).then(
+    (res) => console.log('all1', res),
+    (err) => console.log('all1', err)
+)
+MyPromise.all([p2, p3]).then(
+    (res) => console.log('all2', res),
+    (err) => console.log('all2', err)
+)
+MyPromise.race([p2, p3]).then(
+    (res) => console.log('race', res),
+    (err) => console.log('race', err)
+)
+MyPromise.allSettled([p2, p3]).then(
+    (res) => console.log('allSettled', res),
+    (err) => console.log('allSettled', err)
+)
 ```
 
 ${toc}
