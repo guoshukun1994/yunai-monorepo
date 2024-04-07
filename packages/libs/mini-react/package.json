@@ -1,0 +1,17 @@
+{
+    "name": "mini-react",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "test": "vitest",
+        "build": "vite build",
+        "preview": "vite preview"
+    },
+    "devDependencies": {
+        "happy-dom": "^14.3.10",
+        "vite": "^5.2.0",
+        "vitest": "^1.4.0"
+    }
+}
