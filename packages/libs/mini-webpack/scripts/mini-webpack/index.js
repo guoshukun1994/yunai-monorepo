@@ -11,12 +11,14 @@ let ID = 0
 // filename 参数为文件路径，读取内容并提取它的依赖关系
 function createAsset(filename) {
     const content = fs.readFileSync(filename, 'utf-8')
-    // console.log(`读取到的原始文件-${filename}-的内容`, content)
+    console.log(`1---读取到的原始文件-${filename}-的内容`, content)
 
     // 获取该文件对应的 ast 抽象语法树
     const ast = babylon.parse(content, {
         sourceType: 'module',
     })
+
+    console.log(`2---源文件转化的 ast 文件-${filename}-的内容`, ast)
 
     // dependencise 保存所依赖的模块的相对路径
     const dependencises = []
@@ -30,6 +32,11 @@ function createAsset(filename) {
         },
     })
 
+    console.log(
+        '3---遍历 ast 得到所有 import 的文件------',
+        JSON.stringify(dependencises)
+    )
+
     // 通过递增计数器，为此模块分配唯一标识符，用于缓存已解析过的文件
     const id = ID++
     // 该‘presets’选项是一组规则，告诉‘babel’如何传输我们的代码
@@ -37,6 +44,18 @@ function createAsset(filename) {
     const { code } = transformFromAst(ast, null, {
         presets: ['env'],
     })
+
+    console.log('4---babel 处理过之后的代码------', code)
+
+    console.log(
+        '为当前模块创建的依赖内容',
+        JSON.stringify({
+            id,
+            filename,
+            dependencises,
+            code,
+        })
+    )
 
     // 返回此模块的相关信息
     return {
