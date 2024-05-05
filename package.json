@@ -48,9 +48,9 @@
 		"@commitlint/cli": "^17.8.1",
 		"@commitlint/config-conventional": "^17.8.1",
 		"@types/jest": "^29.5.12",
-		"@types/node": "^18.19.30",
-		"@types/react": "^18.2.74",
-		"@types/react-dom": "^18.2.24",
+		"@types/node": "^18.19.31",
+		"@types/react": "^18.3.1",
+		"@types/react-dom": "^18.3.0",
 		"@typescript-eslint/eslint-plugin": "^6.21.0",
 		"@typescript-eslint/parser": "^6.21.0",
 		"babel-jest": "^29.7.0",
@@ -66,10 +66,10 @@
 		"prettier": "^3.2.5"
 	},
 	"dependencies": {
-		"@ant-design/pro-components": "^2.7.0",
-		"@headlessui/react": "^1.7.18",
-		"react": "^18.2.0",
-		"react-dom": "^18.2.0",
-		"typescript": "^5.4.4"
+		"@ant-design/pro-components": "^2.7.1",
+		"@headlessui/react": "^1.7.19",
+		"react": "^18.3.1",
+		"react-dom": "^18.3.1",
+		"typescript": "^5.4.5"
 	}
 }
